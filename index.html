@@ -338,7 +338,7 @@ function rqPump(){while(RQ.n<RQ.max&&RQ.q.length){const it=RQ.q.shift();RQ.n++;l
 function rqRun(job,pri){return new Promise((res,rej)=>{const it={job,res,rej,pri:!!pri};if(pri){let i=RQ.q.findIndex(x=>!x.pri);if(i<0)i=RQ.q.length;RQ.q.splice(i,0,it)}else RQ.q.push(it);rqPump()})}
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
  
-function call(method,payload,quiet){const isR=READS.includes(method);if(isR){const k=preKey(method,payload),h=PRE[k];if(h){delete PRE[k];if(Date.now()-h.t<180000)return h.p}}else{dropVC();for(const k in PRE)delete PRE[k]}S.calls++;
+function call(method,payload,quiet){const isR=READS.includes(method);if(isR){const k=preKey(method,payload),h=PRE[k];if(h){delete PRE[k];if(Date.now()-h.t<180000)return h.p}}else{dropVC();S.pre={};S.wn=(S.wn||0)+1;for(const k in PRE)delete PRE[k]}S.calls++;
  const body=Object.assign({},payload||{});if(S.as){body.__as=S.as;if(S.act)body.__act=1}if(!quiet){S.busyN++;$('#load').hidden=false}let ended=false;const end=()=>{if(ended)return;ended=true;if(!quiet){S.busyN--;if(S.busyN<=0)$('#load').hidden=true}};
  const once=()=>new Promise((res,rej)=>{let done=false;const tm=setTimeout(()=>{if(done)return;done=true;rej(new Error('เซิร์ฟเวอร์ตอบช้าเกินไป กรุณาลองใหม่'))},60000);const fin=()=>{if(done)return false;done=true;clearTimeout(tm);return true};
   rpcRaw(method,S.token,body).then(raw=>{if(!fin())return;let r;try{r=JSON.parse(raw)}catch(e){rej(new Error('ข้อมูลตอบกลับไม่ถูกต้อง'));return}if(r.ok){if(r.kick)kick();res(r.data)}else{if(r.code==='SESSION')clearSession();const e=new Error(r.error);e.code=r.code||'';rej(e)}},()=>{if(!fin())return;const e=new Error('เชื่อมต่อไม่สำเร็จ กรุณาลองใหม่');e.code='NET';rej(e)})});
@@ -387,7 +387,7 @@ function applyInit(d,stale,already){const me=d.me;S.me=me;if(!stale){if(me.lang=
  if(stale)return;const deep=document.body.dataset.deep;const ft=document.body.dataset.tour==='1';document.body.dataset.tour='';
  if(deep){document.body.dataset.deep='';openReq(deep)}else if(!$('#modals .overlay')&&((S.quiet&&!ft)||!tour(ft))&&isStaff()&&d.overview)dailyPopup(d.overview)}
 async function enter(){const t0=performance.now(),n0=S.calls;const tok=S.token;let shown=false;const c=initCache.get(tok);if(c){try{applyInit(c,true,false);shown=!!$('#main')}catch(e){shown=false}}
- const d=await call('init',{},shown);initCache.set(tok,d);applyInit(d,false,shown);S.perf={ms:Math.round(performance.now()-t0),calls:S.calls-n0}}
+ const w0=S.wn||0;const d=await call('init',{},shown);initCache.set(tok,d);applyInit((S.wn||0)===w0?d:Object.assign({},d,{mine:null,calendar:null}),false,shown);S.perf={ms:Math.round(performance.now()-t0),calls:S.calls-n0}}
 const isStaff=()=>S.me&&(S.me.role==='S'||S.me.role==='A');
  
 const deepTo=v=>{if(!v)return'';if(v==='contact')return S.me.role==='A'?'contact':'';if(v==='change')v='mine';if(v==='admin')return S.me.isAdmin?'admin':'';const ok=navItems().map(x=>x[0]);return ok.includes(v)?v:''};
