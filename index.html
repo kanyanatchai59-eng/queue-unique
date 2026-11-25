@@ -240,7 +240,7 @@ select.cbx-src{position:absolute;left:0;top:0;width:1px;height:1px;min-height:0;
 #movebar{position:sticky;top:0;z-index:60;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:#1f1f22;color:#fff;font-size:14px;text-align:center}
 #movebar a{color:#fff;font-weight:700;background:var(--red);border-radius:999px;padding:5px 14px;text-decoration:none}
 </style>
-<style id="v54">
+<style id="v55">
 @property --cv{syntax:'<integer>';inherits:false;initial-value:0}
 :root{--red:#95191F;--red2:#B0232A;--red-deep:#6E1016;--red-soft:#F6E7E7;--ink:#1E1C1A;--ink2:#4F4B46;--muted:#6B6762;--line:rgba(30,28,26,.09);--line2:rgba(30,28,26,.15);--bg:#EEECE8;--surface:#FAF8F5;--card2:#F3F1ED;--chip:#ECE9E4;--track:#D9D4CD;
 --good:#1F6B3F;--good-bg:#E2F1E7;--warn:#7A4B00;--warn-bg:#FBEFD5;--serious:#8E1B22;--serious-bg:#F8E4E4;--crit:#8E1B22;--crit-bg:#F8E4E4;--info:#1D4C86;--info-bg:#E4ECF7;--neutral:#4F4B46;--neutral-bg:#ECE9E4;
@@ -525,6 +525,7 @@ body:has(#main .card.loading) #load,body:has(#app>.loading) #load{display:none}
 .masc.mimg.say .mb{animation:m-talk .3s ease-in-out infinite alternate}
 @keyframes m-in{from{opacity:0;transform:translateY(12px) scale(.88)}to{opacity:1;transform:none}}
 @keyframes m-talk{from{transform:none}to{transform:translateY(-3px) rotate(-1.2deg)}}
+@media (pointer:coarse){input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]):not([type=color]),select,textarea{font-size:16px}}
 @media(prefers-reduced-motion:reduce){
 @keyframes w-in{from{opacity:0}to{opacity:1}}
 @keyframes w-popin{from{opacity:0}to{opacity:1}}
