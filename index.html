@@ -240,8 +240,9 @@ select.cbx-src{position:absolute;left:0;top:0;width:1px;height:1px;min-height:0;
 #movebar{position:sticky;top:0;z-index:60;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:#1f1f22;color:#fff;font-size:14px;text-align:center}
 #movebar a{color:#fff;font-weight:700;background:var(--red);border-radius:999px;padding:5px 14px;text-decoration:none}
 </style>
-<style id="v55">
+<style id="v56">
 @property --cv{syntax:'<integer>';inherits:false;initial-value:0}
+@property --cd{syntax:'<integer>';inherits:false;initial-value:0}
 :root{--red:#95191F;--red2:#B0232A;--red-deep:#6E1016;--red-soft:#F6E7E7;--ink:#1E1C1A;--ink2:#4F4B46;--muted:#6B6762;--line:rgba(30,28,26,.09);--line2:rgba(30,28,26,.15);--bg:#EEECE8;--surface:#FAF8F5;--card2:#F3F1ED;--chip:#ECE9E4;--track:#D9D4CD;
 --good:#1F6B3F;--good-bg:#E2F1E7;--warn:#7A4B00;--warn-bg:#FBEFD5;--serious:#8E1B22;--serious-bg:#F8E4E4;--crit:#8E1B22;--crit-bg:#F8E4E4;--info:#1D4C86;--info-bg:#E4ECF7;--neutral:#4F4B46;--neutral-bg:#ECE9E4;
 --r:20px;--shadow:0 1px 2px rgba(30,28,26,.04),0 10px 26px rgba(30,28,26,.06);--sh2:0 2px 4px rgba(30,28,26,.06),0 18px 40px rgba(30,28,26,.10);--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1)}
@@ -441,8 +442,10 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 .main.enter>.calwrap,.main.enter>.calbar,.main.enter .calwrap>*{animation-name:w-fade}
 .main.enter .pill{animation:w-pop .7s var(--spring) .3s both}
 .cu{position:relative;color:transparent!important}
-.cu:after{content:counter(c);counter-reset:c var(--cv);--cv:var(--v);position:absolute;inset:0;color:var(--cuc);animation:w-count 1.1s var(--ease) .3s both;white-space:nowrap}
-@keyframes w-count{from{--cv:0}}
+.cu:after{content:counter(c) var(--suf,"");counter-reset:c var(--cv);--cv:var(--v);position:absolute;inset:0;color:var(--cuc);animation:w-count 1.1s var(--ease) .3s both;white-space:nowrap}
+.cu.cu1:after{content:counter(c) "." counter(d) var(--suf,"");counter-reset:c var(--cv) d var(--cd);--cd:var(--vd)}
+.cu.cu2:after{content:counter(c) "." counter(d,decimal-leading-zero) var(--suf,"");counter-reset:c var(--cv) d var(--cd);--cd:var(--vd)}
+@keyframes w-count{from{--cv:0;--cd:0}}
 @keyframes w-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes w-popin{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
 @keyframes w-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
@@ -717,7 +720,7 @@ function renderShell(){window.__booted=true;setTimeout(shellIn,0);const n=navIte
  $('#app').innerHTML=`${stripHtml()}<div class="app"><div class="band"></div><div class="hdr"><a data-do="nav" data-view="${defaultView()}" style="cursor:pointer;text-decoration:none" tabindex="0">${LOGO}</a><nav class="nav">${n.map(link).join('')}</nav><div class="right"><button class="lang" data-do="lang" aria-label="เปลี่ยนเป็นภาษาอังกฤษ">TH</button><button class="bell" data-do="bell" aria-label="การแจ้งเตือน">${icon('bell')}<i data-unread hidden></i></button><button class="menubtn" data-do="menu">${icon('menu')}<span>เมนู</span><i data-pusers hidden></i></button></div></div><main class="main" id="main"></main>${(()=>{const bn=n.filter(x=>x[0]!=='admin');return`<nav class="bottom b${bn.length}" style="--n:${bn.length}"><span class="bi" aria-hidden="true"></span>${bn.map(link).join('')}</nav>`})()}</div>`;setTimeout(fitNav,0);setTimeout(fitNav,400)}
 const RM=()=>!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
 function navInd(v){const b=$('.bottom');if(!b)return;const as=$$('a',b);const i=as.findIndex(a=>a.dataset.view===v);b.style.setProperty('--i',i<0?0:i);b.classList.toggle('noi',i<0)}
-function countUp(root){if(RM()||!(window.CSS&&CSS.registerProperty))return;$$('.kpi b,.dkt b,.wfs .big,.fch .n,.ticket .big',root).forEach(e=>{const t=e.textContent.trim();if(!/^\d{1,5}$/.test(t)||t==='0')return;e.style.setProperty('--cuc',getComputedStyle(e).color);e.style.setProperty('--v',t);e.classList.add('cu');setTimeout(()=>e.classList.remove('cu'),1700)})}
+function countUp(root){if(!(window.CSS&&CSS.registerProperty))return;$$('.kpi b,.dkt b,.wfs .big,.fch .n,.ticket .big,.kbar b,.dfn b,.dfn small,.rank .val,.chart .v',root).forEach(e=>{if(e.children.length)return;const m=/^(\d{1,5})(?:\.(\d{1,2}))?(%?)$/.exec(e.textContent.trim());if(!m||(+m[1]===0&&!+(m[2]||0)))return;e.style.setProperty('--cuc',getComputedStyle(e).color);e.style.setProperty('--v',m[1]);e.style.setProperty('--vd',m[2]?String(+m[2]):'0');e.style.setProperty('--suf',m[3]?'"%"':'""');e.classList.remove('cu1','cu2');if(m[2])e.classList.add(m[2].length>1?'cu2':'cu1');e.classList.add('cu');setTimeout(()=>e.classList.remove('cu','cu1','cu2'),1700)})}
 function motionIn(){const m=$('#main');if(!m)return;m.classList.remove('enter');clearTimeout(motionIn.t);void m.offsetWidth;m.classList.add('enter');motionIn.t=setTimeout(()=>m.classList.remove('enter'),1500);countUp(m)}
 const bIdx=()=>{const b=$('.bottom');if(!b||getComputedStyle(b).display==='none')return -1;return $$('a',b).findIndex(a=>a.classList.contains('on'))};
 function swipeIn(o,n){if(o<0||n<0||o===n)return;const m=$('#main');if(!m)return;m.classList.toggle('sl',n<o);m.classList.remove('swipe');void m.offsetWidth;m.classList.add('swipe');clearTimeout(swipeIn.t);const off=()=>{if(m.classList.contains('enter'))swipeIn.t=setTimeout(off,250);else m.classList.remove('swipe')};swipeIn.t=setTimeout(off,520)}
