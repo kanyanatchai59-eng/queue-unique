@@ -240,7 +240,7 @@ select.cbx-src{position:absolute;left:0;top:0;width:1px;height:1px;min-height:0;
 #movebar{position:sticky;top:0;z-index:60;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:#1f1f22;color:#fff;font-size:14px;text-align:center}
 #movebar a{color:#fff;font-weight:700;background:var(--red);border-radius:999px;padding:5px 14px;text-decoration:none}
 </style>
-<style id="v48">
+<style id="v49">
 @property --cv{syntax:'<integer>';inherits:false;initial-value:0}
 :root{--red:#95191F;--red2:#B0232A;--red-deep:#6E1016;--red-soft:#F6E7E7;--ink:#1E1C1A;--ink2:#4F4B46;--muted:#6B6762;--line:rgba(30,28,26,.09);--line2:rgba(30,28,26,.15);--bg:#EEECE8;--surface:#FAF8F5;--card2:#F3F1ED;--chip:#ECE9E4;--track:#D9D4CD;
 --good:#1F6B3F;--good-bg:#E2F1E7;--warn:#7A4B00;--warn-bg:#FBEFD5;--serious:#8E1B22;--serious-bg:#F8E4E4;--crit:#8E1B22;--crit-bg:#F8E4E4;--info:#1D4C86;--info-bg:#E4ECF7;--neutral:#4F4B46;--neutral-bg:#ECE9E4;
@@ -289,7 +289,6 @@ body{background:var(--bg);color:var(--ink)}
 .chip:active{transform:scale(.96)}
 .chip.on{background:var(--ink);border-color:var(--ink);color:#fff;animation:w-pop .45s var(--spring) both}
 .cmsg{transition:transform .2s var(--ease),box-shadow .25s var(--ease)}
-.cmsg:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
 .cmsg svg{color:var(--red)}
 input[type=text],input[type=email],input[type=password],input[type=date],input[type=time],input[type=number],select,textarea{min-height:50px;border:1px solid var(--line2);border-radius:14px;background:#fff;padding:10px 14px;transition:border-color .2s,box-shadow .2s}
 input:focus,select:focus,textarea:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 4px rgba(149,25,31,.12)}
@@ -298,8 +297,7 @@ label.f>span,.lbl{font-weight:600;font-size:13.5px}
 .multi label{background:var(--surface);border-color:var(--line2)}
 .cbx-lb{border-color:var(--line2);border-radius:14px}
 .ticket{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);text-align:left;transition:transform .25s var(--ease),box-shadow .3s var(--ease)}
-.ticket:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
-.ticket:active{transform:scale(.99)}
+.ticket:active{transform:scale(.975)}
 .tk-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 16px 0;flex-wrap:wrap}
 .tk-lab{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--chip);color:var(--ink2);font-size:12.5px;font-weight:500}
 .tk-lab .icon{width:15px;height:15px}
@@ -325,7 +323,6 @@ label.f>span,.lbl{font-weight:600;font-size:13.5px}
 .ticket .tk-go{color:var(--red);font-weight:600;font-size:13.5px}
 .tiles{gap:10px}
 .tile{align-items:flex-start;justify-content:space-between;text-align:left;min-height:92px;padding:14px;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);font-weight:600;transition:transform .2s var(--ease),box-shadow .25s var(--ease)}
-.tile:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
 .tile:active{transform:scale(.96)}
 .tile .ti{width:36px;height:36px;border-radius:12px}
 span.tile{min-height:0;box-shadow:none;border-radius:14px}
@@ -345,8 +342,7 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 .time[disabled]{background:var(--chip);color:#8A857E}
 .time.busy{background:var(--card2)}
 .kindc{border-radius:18px;border-color:var(--line);background:var(--surface);box-shadow:var(--shadow);transition:transform .2s var(--ease),box-shadow .25s var(--ease),border-color .2s}
-.kindc:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:var(--sh2)}
-.kindc:active{transform:scale(.98)}
+.kindc:active{transform:scale(.97)}
 .kindc .ki{border-radius:14px;background:var(--red-soft);color:var(--red)}
 .kindc.k-urgent .ki{background:var(--red);color:#fff}
 .stepper button{border-color:var(--line2);background:var(--surface)}
@@ -401,9 +397,9 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 @media(max-width:1020px){
 .main{padding-bottom:118px}
 .bottom{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));padding:6px;border-radius:999px;border:1px solid var(--line);background:var(--surface);box-shadow:0 12px 30px rgba(30,28,26,.14);min-height:64px;animation:w-up .6s var(--ease) .2s both}
-.bottom a{z-index:1;border-radius:999px;justify-content:center;color:var(--ink2);font-size:11px;padding:5px 1px;transition:color .3s var(--ease)}
+.bottom a{z-index:1;border-radius:999px;justify-content:center;color:var(--ink2);font-size:11px;padding:5px 1px;transition:none}
 .bottom a .icon{width:19px;height:19px}
-.bottom a.on{color:#fff;font-weight:600;background-color:var(--red);transition:color .3s var(--ease)}
+.bottom a.on{color:#fff;font-weight:600;background-color:var(--red);transition:none;animation:w-tabin .5s var(--spring)}
 .bottom .bi{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/var(--n,3));border-radius:999px;background:var(--red);box-shadow:0 6px 14px rgba(149,25,31,.3);translate:calc(var(--i,0)*100%) 0;transition:translate .5s var(--spring);animation:w-pop .6s var(--spring) .5s backwards}
 .bottom.noi .bi{opacity:0}
 .bottom.b3 a,.bottom.b2 a{flex-direction:row;gap:6px;font-size:14px}
@@ -462,7 +458,61 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 @keyframes w-glow{0%,100%{filter:drop-shadow(0 0 0 rgba(149,25,31,0))}50%{filter:drop-shadow(0 0 6px rgba(149,25,31,.55))}}
 @keyframes tkseg{from{stroke-dasharray:0 100}}
 @keyframes okring{0%{opacity:.6;transform:scale(.7)}100%{opacity:0;transform:scale(1.5)}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.okmark .k{stroke-dashoffset:0}.okmark .r1,.okmark .r2{display:none}}
+@media(hover:hover){
+.cmsg:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.ticket:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.kindc:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:var(--sh2)}
+}
+.ticket,.tile,.kindc,.q,.btn,.day,.time,.chip,.cmsg,.persona,.lang{position:relative}
+.ticket,.tile,.kindc,.q,.btn,.day,.time,.chip,.cmsg,.persona,.lang,.bottom a,.menubtn,.bell,.nav a{-webkit-tap-highlight-color:transparent}
+.rpl{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.rpl i{position:absolute;border-radius:50%;background:currentColor;opacity:.2;transform:scale(0);animation:w-rpl .65s var(--ease) forwards}
+.q{transition:background .2s,transform .2s var(--ease)}
+.q:active{transform:scale(.985)}
+.cmsg:active{transform:scale(.98)}
+.card.loading{background:var(--surface) linear-gradient(100deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 65%) no-repeat;background-size:200% 100%;animation:w-shim 1.3s linear infinite}
+.app.boot .band{transform-origin:top;animation:w-band .75s var(--ease) both}
+.app.boot .hdr{animation:w-drop .7s var(--spring) .1s both}
+.app.boot .hdr .logo{animation:w-pop .6s var(--spring) .3s both}
+.app.boot .hdr .right>*{animation:w-pop .5s var(--spring) .38s both}
+.app.boot .hdr .right>*:nth-child(2){animation-delay:.46s}
+.app.boot .hdr .right>*:nth-child(3){animation-delay:.54s}
+.nav a.on .icon,.bottom a.on .icon{animation:w-bob .6s var(--spring)}
+.main.swipe{overflow-x:clip}
+.main.swipe>:not(.calwrap):not(.calbar){animation:w-swipe .45s var(--ease) both}
+.still .time:not(.on),.still .progress span.on,.still .day.on{animation:none}
+.time.on{animation:w-sel .45s var(--spring) both}
+.day.on{animation:w-lift .5s var(--spring) both}
+@keyframes w-tabin{0%{transform:scale(.82)}60%{transform:scale(1.06)}100%{transform:none}}
+@keyframes w-rpl{to{transform:scale(1);opacity:0}}
+@keyframes w-shim{from{background-position:160% 0}to{background-position:-60% 0}}
+@keyframes w-band{from{transform:scaleY(.3)}to{transform:none}}
+@keyframes w-drop{from{opacity:0;transform:translateY(-22px)}to{opacity:1;transform:none}}
+@keyframes w-bob{0%{transform:none}35%{transform:translateY(-5px) scale(1.18)}65%{transform:translateY(1px) scale(.96)}100%{transform:none}}
+@keyframes w-swipe{from{opacity:0;transform:translateX(var(--sx,28px))}to{opacity:1;transform:none}}
+@keyframes w-sel{0%{transform:scale(.86)}60%{transform:scale(1.12)}100%{transform:scale(1.04)}}
+@keyframes w-lift{0%{transform:scale(.9)}60%{transform:translateY(-6px) scale(1.05)}100%{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){
+@keyframes w-in{from{opacity:0}to{opacity:1}}
+@keyframes w-popin{from{opacity:0}to{opacity:1}}
+@keyframes w-up{from{opacity:0}to{opacity:1}}
+@keyframes w-pop{from{opacity:0}to{opacity:1}}
+@keyframes w-sheet{from{opacity:0}to{opacity:1}}
+@keyframes w-swipe{from{opacity:0}to{opacity:1}}
+@keyframes w-drop{from{opacity:0}to{opacity:1}}
+@keyframes w-band{from{opacity:.7}to{opacity:1}}
+@keyframes w-grow{from{opacity:0}to{opacity:1}}
+@keyframes w-growy{from{opacity:0}to{opacity:1}}
+@keyframes w-sel{from{opacity:.6}to{opacity:1}}
+@keyframes w-lift{from{opacity:.6}to{opacity:1}}
+@keyframes w-bob{from{opacity:.6}to{opacity:1}}
+@keyframes w-tabin{from{opacity:.7}to{opacity:1}}
+.pill.warn:before,.q.now .no,.step.cur:before,.login .wrap>div:first-child:after,.card.loading{animation:none!important}
+.tk-ring .sg.me{animation:tkseg .6s var(--ease) both!important}
+*,*:before,*:after{transition-duration:.01ms!important}
+.okmark .r1,.okmark .r2,.rpl{display:none}
+}
 .tk-go:after{content:' ›'}
 @media(min-width:1100px){.stack:has(>.ticket+.ticket){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.stack:has(>.ticket+.ticket)>:not(.ticket){grid-column:1/-1}}
 </style>
@@ -620,18 +670,24 @@ const deepTo=v=>{if(!v)return'';if(v==='contact')return S.me.role==='A'?'contact
 const defaultView=()=>isStaff()?'home':'mine';
 function navItems(){const r=S.me.role;let n=r==='A'?[['home','ตารางนัดหมาย','cal','ตาราง'],['inbox','กล่องนัดหมาย','inbox','กล่อง'],['live','คิวสด','queue'],['basket','ตะกร้าฝาก','basket','ตะกร้า'],['rounds','รอบเซ็น','plus'],['book','จองคิว','ticket'],['dash','Dashboard','chart','สถิติ']]:r==='S'?[['home','ตารางนัดหมาย','cal'],['inbox','คำขอทั้งหมด','inbox'],['live','คิวสด','queue'],['dash','Dashboard','chart']]:[['mine','คิวของฉัน','ticket'],['book','จองคิว','plus'],['history','ประวัติ','hist']];if(S.me.isAdmin){if(!n.some(x=>x[0]==='dash'))n=n.concat([['dash','Dashboard','chart']]);n=n.concat([['admin','ผู้ดูแล','users']])}return n}
 function stripHtml(){const b=S.boot;if(!b.viewAs&&!b.demo)return'';const tag=b.demo?'<span class="tag">Demo</span>':'';const as=b.viewAs?`<span class="who">ดูเป็น ${esc(S.me.name)} · ${esc(ROLE[S.me.role])}${b.readOnly?' · ดูอย่างเดียว':' · กดแทนได้ ทุกการกดถูกบันทึกชื่อคุณ'}</span><button data-do="actAs">${b.readOnly?'ทดลองกดแทน':'หยุดกดแทน'}</button><button data-do="exitAs">กลับสู่ Admin</button>`:'';const note=b.demo?'<span class="tx">ข้อมูลตัวอย่าง ไม่ส่งแจ้งเตือนถึงผู้ใช้จริง</span>':'';return`<div class="strip ${b.viewAs?'as':''}">${tag}${as}${note}</div>`}
-function renderShell(){window.__booted=true;const n=navItems();const link=x=>`<a data-do="nav" data-view="${x[0]}" tabindex="0" title="${x[1]}">${icon(x[2])}<span class="${x[3]?'lg':''}">${x[1]}</span>${x[3]?`<span class="sh">${x[3]}</span>`:''}${x[0]==='inbox'?'<em class="count" data-pending hidden></em>':x[0]==='admin'?'<em class="count" data-pusers hidden></em>':''}</a>`;
+function renderShell(){window.__booted=true;setTimeout(shellIn,0);const n=navItems();const link=x=>`<a data-do="nav" data-view="${x[0]}" tabindex="0" title="${x[1]}">${icon(x[2])}<span class="${x[3]?'lg':''}">${x[1]}</span>${x[3]?`<span class="sh">${x[3]}</span>`:''}${x[0]==='inbox'?'<em class="count" data-pending hidden></em>':x[0]==='admin'?'<em class="count" data-pusers hidden></em>':''}</a>`;
  $('#app').innerHTML=`${stripHtml()}<div class="app"><div class="band"></div><div class="hdr"><a data-do="nav" data-view="${defaultView()}" style="cursor:pointer;text-decoration:none" tabindex="0">${LOGO}</a><nav class="nav">${n.map(link).join('')}</nav><div class="right"><button class="lang" data-do="lang" aria-label="เปลี่ยนเป็นภาษาอังกฤษ">TH</button><button class="bell" data-do="bell" aria-label="การแจ้งเตือน">${icon('bell')}<i data-unread hidden></i></button><button class="menubtn" data-do="menu">${icon('menu')}<span>เมนู</span><i data-pusers hidden></i></button></div></div><main class="main" id="main"></main>${(()=>{const bn=n.filter(x=>x[0]!=='admin');return`<nav class="bottom b${bn.length}" style="--n:${bn.length}"><span class="bi" aria-hidden="true"></span>${bn.map(link).join('')}</nav>`})()}</div>`;setTimeout(fitNav,0);setTimeout(fitNav,400)}
 const RM=()=>!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
 function navInd(v){const b=$('.bottom');if(!b)return;const as=$$('a',b);const i=as.findIndex(a=>a.dataset.view===v);b.style.setProperty('--i',i<0?0:i);b.classList.toggle('noi',i<0)}
 function countUp(root){if(RM()||!(window.CSS&&CSS.registerProperty))return;$$('.kpi b,.dkt b,.wfs .big,.fch .n,.ticket .big',root).forEach(e=>{const t=e.textContent.trim();if(!/^\d{1,5}$/.test(t)||t==='0')return;e.style.setProperty('--cuc',getComputedStyle(e).color);e.style.setProperty('--v',t);e.classList.add('cu');setTimeout(()=>e.classList.remove('cu'),1700)})}
-function motionIn(){const m=$('#main');if(!m)return;m.classList.remove('enter');clearTimeout(motionIn.t);if(RM())return;void m.offsetWidth;m.classList.add('enter');motionIn.t=setTimeout(()=>m.classList.remove('enter'),1500);countUp(m)}
+function motionIn(){const m=$('#main');if(!m)return;m.classList.remove('enter');clearTimeout(motionIn.t);void m.offsetWidth;m.classList.add('enter');motionIn.t=setTimeout(()=>m.classList.remove('enter'),1500);countUp(m)}
+const bIdx=()=>{const b=$('.bottom');if(!b||getComputedStyle(b).display==='none')return -1;return $$('a',b).findIndex(a=>a.classList.contains('on'))};
+function swipeIn(o,n){if(o<0||n<0||o===n)return;const m=$('#main');if(!m)return;m.style.setProperty('--sx',(n>o?32:-32)+'px');m.classList.remove('swipe');void m.offsetWidth;m.classList.add('swipe');clearTimeout(swipeIn.t);const off=()=>{if(m.classList.contains('enter'))swipeIn.t=setTimeout(off,250);else m.classList.remove('swipe')};swipeIn.t=setTimeout(off,520)}
+function shellIn(){const a=$('.app');if(!a)return;a.classList.remove('boot');void a.offsetWidth;a.classList.add('boot');clearTimeout(shellIn.t);shellIn.t=setTimeout(()=>a.classList.remove('boot'),1400)}
+document.addEventListener('touchstart',()=>{},{passive:true});
+const RPL='.ticket,.tile:not(span),.kindc,.q,.btn,.day,.time,.chip,.cmsg,.persona,.bottom a,.menubtn,.bell,.lang';
+document.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'||RM())return;const t=e.target.closest&&e.target.closest(RPL);if(!t||t.disabled)return;const r=t.getBoundingClientRect(),d=Math.max(r.width,r.height)*2.4,w=document.createElement('span'),i=document.createElement('i');w.className='rpl';w.setAttribute('aria-hidden','true');i.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;w.appendChild(i);t.appendChild(w);setTimeout(()=>w.remove(),700)},{passive:true});
 function fitNav(){const h=$('.hdr'),n=h&&h.querySelector('.nav');if(!n)return;h.classList.remove('c1','c2');if(!n.offsetParent)return;const over=()=>n.scrollWidth>n.clientWidth+1;if(over())h.classList.add('c1');if(over())h.classList.add('c2')}
 window.addEventListener('resize',()=>{clearTimeout(window.__fn);window.__fn=setTimeout(fitNav,120)});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fitNav());
 function pendingCard(){const l=S.as||!S.me.isAdmin?[]:(S.pendUsers||[]);return l.length?`<div class="card pad pend"><div class="row spread" style="flex-wrap:nowrap"><b>มีผู้ขอใช้งาน ${l.length} คน รออนุมัติ</b><button class="btn small" data-do="nav" data-view="admin">ดูทั้งหมด</button></div>${l.slice(0,5).map(x=>`<div class="prow"><span style="min-width:0"><b style="font-weight:600">${esc(x.name||'-')}</b><span class="hint" style="display:block;overflow-wrap:anywhere">${esc(x.department)} · ${esc(x.company)} · ${esc(whoOf(x))}</span>${hrTag(x)}</span><button class="btn small primary" data-do="apUser" data-e="${esc(x.email)}">อนุมัติ</button></div>`).join('')}</div>`:''}
 function setTop(title,sub,extra){return`<div class="top"><div><h1>${esc(title)}</h1>${sub?`<div class="sub">${sub}</div>`:''}</div>${extra?`<div class="row" style="flex-wrap:nowrap">${extra}</div>`:''}</div>`}
 const guard=(el,seq)=>{const rs=S.rseq;return new Proxy(el,{set(t,k,v){if(seq===S.seq)t[k]=v;return true},get(t,k){if(k==='__alive')return seq===S.seq&&rs===S.rseq;const v=t[k];return typeof v==='function'?v.bind(t):v}})};
-async function go(view,params){clearTimers();S.rseq=(S.rseq||0)+1;S.view=view;S.params=params||{};const seq=++S.seq;$$('[data-view]').forEach(a=>a.classList.toggle('on',a.dataset.view===view));navInd(view);$$('.panel').forEach(p=>p.remove());const el=$('#main');const ck=view+'|'+(S.as||'')+'|'+JSON.stringify(S.params);const hit=CACHEV.includes(view)&&VC[ck];el.innerHTML=hit||setTop('กำลังโหลด…')+'<div class="card loading">กำลังโหลดข้อมูล…</div>';if(hit)paintCounts();window.scrollTo(0,0);try{await VIEWS[view](guard(el,seq),S.params);if(seq===S.seq){paintCounts();if(CACHEV.includes(view))VC[ck]=el.innerHTML;motionIn()}}catch(e){if(S.token&&seq===S.seq)el.innerHTML=setTop('เกิดข้อผิดพลาด')+`<div class="card empty">${esc(e.message)}<br><br><button class="btn" data-do="reload">ลองใหม่</button></div>`}}
+async function go(view,params){clearTimers();S.rseq=(S.rseq||0)+1;S.view=view;S.params=params||{};const seq=++S.seq;const bo=bIdx();$$('[data-view]').forEach(a=>a.classList.toggle('on',a.dataset.view===view));navInd(view);$$('.panel').forEach(p=>p.remove());const el=$('#main');const ck=view+'|'+(S.as||'')+'|'+JSON.stringify(S.params);const hit=CACHEV.includes(view)&&VC[ck];el.innerHTML=hit||setTop('กำลังโหลด…')+'<div class="card loading">กำลังโหลดข้อมูล…</div>';swipeIn(bo,bIdx());if(hit){paintCounts();motionIn()}window.scrollTo(0,0);let same=false;const g=guard(el,seq);try{await VIEWS[view](hit?new Proxy(g,{set(t,k,v){if(k==='innerHTML'){if(v===hit){same=true;return true}same=false}t[k]=v;return true}}):g,S.params);if(seq===S.seq){paintCounts();if(!same){if(CACHEV.includes(view))VC[ck]=el.innerHTML;motionIn()}}}catch(e){if(S.token&&seq===S.seq)el.innerHTML=setTop('เกิดข้อผิดพลาด')+`<div class="card empty">${esc(e.message)}<br><br><button class="btn" data-do="reload">ลองใหม่</button></div>`}}
 function refresh(){if(!S.view||S.view==='book')return;clearTimers();S.rseq=(S.rseq||0)+1;VIEWS[S.view](guard($('#main'),S.seq),S.params).then(paintCounts).catch(()=>{})}
 function paintCounts(){$$('[data-cu]').forEach(e=>{e.textContent=S.cu||0;e.hidden=!S.cu});const pu=S.as?0:(S.pendUsers||[]).length;$$('[data-pusers]').forEach(e=>{e.textContent=pu;e.hidden=!pu});$$('[data-unread]').forEach(e=>{e.textContent=S.unread;e.hidden=!S.unread});$$('[data-pending]').forEach(e=>{e.textContent=S.pending;e.hidden=!S.pending})}
 function applyPoll(p,first){S.unread=p.unread;if(p.contactUnread!==undefined)S.cu=p.contactUnread;if(p.pending!==undefined)S.pending=p.pending;S.notifs=p.items;if(p.pendingUsers){const ch=(S.pendUsers||[]).length!==p.pendingUsers.length;S.pendUsers=p.pendingUsers;if(ch&&!first&&!S.as&&(S.view==='mine'||S.view==='home')&&!$('#modals .overlay'))refresh()}p.items.slice().reverse().forEach(n=>{if(!S.seen[n.id]){if(S.polled&&!first)popCard(n);S.seen[n.id]=1}});S.polled=true;paintCounts()}
@@ -785,7 +841,7 @@ const BK={s:null,
  prev(){const s=this.s;if(s.slot===null)return null;for(let i=s.slot-1;i>=0;i--){const x=s.slots[i];if(x.done)continue;if(x.who)return x.who;if(x.mine)return{name:'คุณ',department:''}}return null},
  paint(){const s=this.s,b=S.boot;const title=s.edit?'แก้ไขคำขอ':s.rebookOf?'จองรอบใหม่จากงานเดิม':'จองคิว';const stepName=['เลือกวันและเวลา','บอกเรื่องที่จะขออนุมัติ','ตรวจสอบก่อนส่ง'][s.step-1];
   const top=setTop(title,`ขั้นที่ ${s.step} จาก 3 · ${stepName}`)+`<div class="progress">${[1,2,3].map(i=>`<span class="${i<=s.step?'on':''}"></span>`).join('')}</div>`;
-  if(s.step===1)s.el.innerHTML=top+this.step1();else if(s.step===2)s.el.innerHTML=top+this.step2();else s.el.innerHTML=top+this.step3();
+  if(s.step===1)s.el.innerHTML=top+this.step1();else if(s.step===2)s.el.innerHTML=top+this.step2();else s.el.innerHTML=top+this.step3();{const ak=s.step+'|'+(s.round?s.round.id:'');if(s._ak===ak)$$('.times,.progress,.days',s.el).forEach(x=>x.classList.add('still'));s._ak=ak}
   if(s.step===2){const sy=()=>{this.keep();DOCF.sync(s.el,'b',s.f)};['b_dtype','b_proj'].forEach(id=>{const x=$('#'+id,s.el);if(x)x.onchange=sy});CBX.wire(s.el,['b_dtype','b_proj','b_dept']);CBX.titles($('#b_title',s.el))}
   const bs=$('#b_boss',s.el);if(bs)bs.onchange=async()=>{s.boss=bs.value;s.round=null;s.slot=null;await this.loadRounds();this.paint()};
   const inp=$('#b_file',s.el);if(inp)inp.onchange=()=>{this.keep();for(const fl of inp.files){if(fl.size>b.maxFileMb*1048576){toast(fl.name+' ใหญ่เกิน '+b.maxFileMb+' MB',true);continue}if(s.files.length>=b.maxFiles){toast('แนบได้สูงสุด '+b.maxFiles+' ไฟล์',true);break}s.files.push(fl)}this.paint()};if(s.shownStep!==s.step){s.shownStep=s.step;window.scrollTo(0,0)}},
