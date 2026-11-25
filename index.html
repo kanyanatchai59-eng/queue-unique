@@ -240,7 +240,7 @@ select.cbx-src{position:absolute;left:0;top:0;width:1px;height:1px;min-height:0;
 #movebar{position:sticky;top:0;z-index:60;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:#1f1f22;color:#fff;font-size:14px;text-align:center}
 #movebar a{color:#fff;font-weight:700;background:var(--red);border-radius:999px;padding:5px 14px;text-decoration:none}
 </style>
-<style id="v53">
+<style id="v54">
 @property --cv{syntax:'<integer>';inherits:false;initial-value:0}
 :root{--red:#95191F;--red2:#B0232A;--red-deep:#6E1016;--red-soft:#F6E7E7;--ink:#1E1C1A;--ink2:#4F4B46;--muted:#6B6762;--line:rgba(30,28,26,.09);--line2:rgba(30,28,26,.15);--bg:#EEECE8;--surface:#FAF8F5;--card2:#F3F1ED;--chip:#ECE9E4;--track:#D9D4CD;
 --good:#1F6B3F;--good-bg:#E2F1E7;--warn:#7A4B00;--warn-bg:#FBEFD5;--serious:#8E1B22;--serious-bg:#F8E4E4;--crit:#8E1B22;--crit-bg:#F8E4E4;--info:#1D4C86;--info-bg:#E4ECF7;--neutral:#4F4B46;--neutral-bg:#ECE9E4;
@@ -545,11 +545,15 @@ body:has(#main .card.loading) #load,body:has(#app>.loading) #load{display:none}
 @keyframes w-bob{from{opacity:.6}to{opacity:1}}
 @keyframes w-tabin{from{opacity:.7}to{opacity:1}}
 .login .wrap>div:first-child:after{animation:none!important}
-.qcube .qc-s,.qcube .qc-l{animation:none!important}
-.qcube{animation:w-dot 1.4s ease-in-out infinite}
 .tk-ring .sg.me{animation:tkseg .6s var(--ease) both!important}
 *,*:before,*:after{transition-duration:.01ms!important}
 .okmark .r1,.okmark .r2,.rpl{display:none}
+.coach .c-ring{transition:left .28s,top .28s,width .28s,height .28s!important}
+.coach .c-ring:after{animation:cpulse 1.4s ease-in-out infinite!important}
+.coach .c-bub{transition:left .28s,top .28s!important}
+.coach .masc.mimg .mb{animation:mbob 2.6s ease-in-out infinite!important}
+.coach .masc.mimg.say .mb{animation:m-talk .3s ease-in-out infinite alternate!important}
+.coach .masc.mimg img.in{animation:m-in .5s var(--spring) both!important}
 }
 .tk-go:after{content:' ›'}
 @media(min-width:1100px){.stack:has(>.ticket+.ticket){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.stack:has(>.ticket+.ticket)>:not(.ticket){grid-column:1/-1}}
@@ -1184,7 +1188,7 @@ function tour(force){
   try{late=false;if(st.v&&(S.view!==st.v||(st.p&&(S.params||{}).kind!==st.p.kind)||(!st.p&&st.v==='book'&&(S.params||{}).kind))){const g=go(st.v,st.p);if(loading()||st.s&&!findT(st.s)){busyMsg();await g}}
    if(!alive)return;target=st.s?findT(st.s):null;if(st.s&&!target){if(loading())busyMsg();target=await waitT(st.s)}if(!alive)return;
    if(st.s&&!target&&st.opt){moving=false;return await show(i+dir<0?i+1:i+dir)}
-   if(target&&!target.closest('.hdr,.bottom')){const r=target.getBoundingClientRect();if(r.top<104||r.bottom>innerHeight-24){const tall=r.height>innerHeight*.45;target.scrollIntoView({block:tall?'start':'center'});if(tall)scrollBy(0,-112)}}
+   if(target&&!target.closest('.hdr,.bottom')){const r=target.getBoundingClientRect();if(r.top<104||r.bottom>innerHeight-24){const tall=r.height>innerHeight*.45;target.style.scrollMarginTop=tall?'112px':'';try{target.scrollIntoView({block:tall?'start':'center',behavior:'smooth'})}catch(e){target.scrollIntoView(!tall)}await new Promise(res=>{let last=-1,same=0,n=0;const t=setInterval(()=>{n++;const y=scrollY;if(Math.abs(y-last)<1)same++;else same=0;last=y;if(same>=3||n>=30){clearInterval(t);res()}},40)});target.style.scrollMarginTop='';if(!alive)return}}
    const who=st.adm?'ผู้ดูแลระบบ':ROLE[S.me.role];stepEl.textContent=en()?`${i+1} of ${steps.length} · for ${L(who)}`:`${i+1} จาก ${steps.length} · สำหรับ${who}`;hEl.textContent=L(st.t);late=!!st.s&&!target;const text=L(st.x)+(late?(en()?' (not on this screen yet)':' (ตอนนี้ยังไม่มีส่วนนี้บนหน้าจอค่ะ)'):'');moving=false;say(text);speak(L(st.t),text);
    backB.hidden=i===0;nextB.textContent=L(i===steps.length-1?'เริ่มใช้งาน':'ถัดไป');place();nextB.focus({preventScroll:true})}
   catch(e){moving=false}finally{moving=false;nextB.disabled=backB.disabled=false}};
