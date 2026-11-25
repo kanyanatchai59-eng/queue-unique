@@ -240,7 +240,7 @@ select.cbx-src{position:absolute;left:0;top:0;width:1px;height:1px;min-height:0;
 #movebar{position:sticky;top:0;z-index:60;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:#1f1f22;color:#fff;font-size:14px;text-align:center}
 #movebar a{color:#fff;font-weight:700;background:var(--red);border-radius:999px;padding:5px 14px;text-decoration:none}
 </style>
-<style id="v50">
+<style id="v51">
 @property --cv{syntax:'<integer>';inherits:false;initial-value:0}
 :root{--red:#95191F;--red2:#B0232A;--red-deep:#6E1016;--red-soft:#F6E7E7;--ink:#1E1C1A;--ink2:#4F4B46;--muted:#6B6762;--line:rgba(30,28,26,.09);--line2:rgba(30,28,26,.15);--bg:#EEECE8;--surface:#FAF8F5;--card2:#F3F1ED;--chip:#ECE9E4;--track:#D9D4CD;
 --good:#1F6B3F;--good-bg:#E2F1E7;--warn:#7A4B00;--warn-bg:#FBEFD5;--serious:#8E1B22;--serious-bg:#F8E4E4;--crit:#8E1B22;--crit-bg:#F8E4E4;--info:#1D4C86;--info-bg:#E4ECF7;--neutral:#4F4B46;--neutral-bg:#ECE9E4;
@@ -308,7 +308,7 @@ label.f>span,.lbl{font-weight:600;font-size:13.5px}
 .tk-ring .trk{stroke:var(--track)}
 .tk-ring .sg{stroke:var(--track);animation:tkseg .6s var(--ease) both;animation-delay:calc(.25s + var(--d,0)*120ms)}
 .tk-ring .sg.dn{stroke:#A39E97}
-.tk-ring .sg.me{stroke:var(--red);animation:tkseg .6s var(--ease) both,w-seg 1.4s ease-in-out 1.4s infinite;animation-delay:calc(.25s + var(--d,0)*120ms),1.4s}
+.tk-ring .sg.me{stroke:var(--red);animation:tkseg .6s var(--ease) both,w-segpop .7s var(--spring) both;animation-delay:calc(.25s + var(--d,0)*120ms),calc(.95s + var(--d,0)*120ms)}
 .tk-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
 .tk-num small{font-size:12.5px;color:var(--muted);margin-bottom:2px}
 .ticket .big{font-size:56px;line-height:1;font-weight:700;color:var(--red)}
@@ -497,7 +497,7 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 @keyframes w-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.15;transform:scale(.75)}}
 @keyframes w-chip{0%,100%{box-shadow:0 0 0 0 rgba(122,75,0,.3)}60%{box-shadow:0 0 0 6px rgba(122,75,0,0)}}
 @keyframes w-ring2{0%{background:#fff;box-shadow:inset 0 0 0 4px #95191F,0 0 0 0 rgba(149,25,31,.55)}35%{background:#EBB5BA}70%{background:#fff;box-shadow:inset 0 0 0 4px #95191F,0 0 0 11px rgba(149,25,31,0)}100%{background:#fff;box-shadow:inset 0 0 0 4px #95191F,0 0 0 0 rgba(149,25,31,0)}}
-@keyframes w-seg{0%,100%{stroke-opacity:1}50%{stroke-opacity:.3}}
+@keyframes w-segpop{0%{stroke-width:10}45%{stroke-width:15}100%{stroke-width:10}}
 @keyframes w-sel{0%{transform:scale(.86)}60%{transform:scale(1.12)}100%{transform:scale(1.04)}}
 @keyframes w-lift{0%{transform:scale(.9)}60%{transform:translateY(-6px) scale(1.05)}100%{transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){
@@ -520,7 +520,7 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 @keyframes w-bob{from{opacity:.6}to{opacity:1}}
 @keyframes w-tabin{from{opacity:.7}to{opacity:1}}
 .login .wrap>div:first-child:after,.card.loading{animation:none!important}
-.tk-ring .sg.me{animation:tkseg .6s var(--ease) both,w-seg 1.4s ease-in-out 1.4s infinite!important}
+.tk-ring .sg.me{animation:tkseg .6s var(--ease) both!important}
 *,*:before,*:after{transition-duration:.01ms!important}
 .okmark .r1,.okmark .r2,.rpl{display:none}
 }
