@@ -240,7 +240,7 @@ select.cbx-src{position:absolute;left:0;top:0;width:1px;height:1px;min-height:0;
 #movebar{position:sticky;top:0;z-index:60;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:#1f1f22;color:#fff;font-size:14px;text-align:center}
 #movebar a{color:#fff;font-weight:700;background:var(--red);border-radius:999px;padding:5px 14px;text-decoration:none}
 </style>
-<style id="v51">
+<style id="v52">
 @property --cv{syntax:'<integer>';inherits:false;initial-value:0}
 :root{--red:#95191F;--red2:#B0232A;--red-deep:#6E1016;--red-soft:#F6E7E7;--ink:#1E1C1A;--ink2:#4F4B46;--muted:#6B6762;--line:rgba(30,28,26,.09);--line2:rgba(30,28,26,.15);--bg:#EEECE8;--surface:#FAF8F5;--card2:#F3F1ED;--chip:#ECE9E4;--track:#D9D4CD;
 --good:#1F6B3F;--good-bg:#E2F1E7;--warn:#7A4B00;--warn-bg:#FBEFD5;--serious:#8E1B22;--serious-bg:#F8E4E4;--crit:#8E1B22;--crit-bg:#F8E4E4;--info:#1D4C86;--info-bg:#E4ECF7;--neutral:#4F4B46;--neutral-bg:#ECE9E4;
@@ -471,7 +471,8 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 .q{transition:background .2s,transform .2s var(--ease)}
 .q:active{transform:scale(.985)}
 .cmsg:active{transform:scale(.98)}
-.card.loading{background:var(--surface) linear-gradient(100deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 65%) no-repeat;background-size:200% 100%;animation:w-shim 1.3s linear infinite}
+.card.loading,#app>.loading{display:flex;flex-direction:column;align-items:center;gap:16px}
+.card.loading .qcube,#app>.loading .qcube{--u:17px}
 .app.boot .band{transform-origin:top;animation:w-band .75s var(--ease) both}
 .app.boot .hdr{animation:w-drop .7s var(--spring) .1s both}
 .app.boot .hdr .logo{animation:w-pop .6s var(--spring) .3s both}
@@ -500,6 +501,23 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 @keyframes w-segpop{0%{stroke-width:10}45%{stroke-width:15}100%{stroke-width:10}}
 @keyframes w-sel{0%{transform:scale(.86)}60%{transform:scale(1.12)}100%{transform:scale(1.04)}}
 @keyframes w-lift{0%{transform:scale(.9)}60%{transform:translateY(-6px) scale(1.05)}100%{transform:translateY(-3px)}}
+.load{top:50%;left:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:22px;background:var(--surface);background-image:none;border:1px solid var(--line);box-shadow:0 14px 34px rgba(30,28,26,.18);display:grid;place-items:center;pointer-events:none;animation:w-pop .4s var(--spring) .25s both}
+.load[hidden]{display:none}
+body:has(#main .card.loading) #load,body:has(#app>.loading) #load{display:none}
+.qcube{--u:12px;position:relative;display:inline-block;width:calc(var(--u)*3);height:calc(var(--u)*3);vertical-align:middle;flex:none}
+.qcube .qc-s,.qcube .qc-l,.qcube i{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.qcube .qc-s{transform:rotateX(-28deg) rotateY(45deg);animation:qc-spin 4.8s linear infinite}
+.qcube .qc-t{animation:qc-twist 1.6s cubic-bezier(.65,0,.3,1) infinite}
+.qcube .qc-b{animation:qc-twist2 1.6s cubic-bezier(.65,0,.3,1) .8s infinite}
+.qcube i{width:var(--u);height:var(--u);margin:calc(var(--u)/-2) 0 0 calc(var(--u)/-2);transform:translate3d(calc(var(--x)*var(--u)/2),calc(var(--y)*var(--u)/2),calc(var(--z)*var(--u)/2))}
+.qcube b{position:absolute;inset:0;box-sizing:border-box;background:#FAF8F5;border:calc(var(--u)/6) solid #1E1C1A;border-radius:calc(var(--u)/6)}
+.qcube .fy{transform:rotateX(calc(var(--y)*-90deg)) translateZ(calc(var(--u)/2))}
+.qcube .fx{transform:rotateY(calc(var(--x)*90deg)) translateZ(calc(var(--u)/2))}
+.qcube .fz{transform:rotateY(calc((1 - var(--z))*90deg)) translateZ(calc(var(--u)/2))}
+.qcube .qc-t .fy{background:#95191F}
+@keyframes qc-spin{from{transform:rotateX(-28deg) rotateY(45deg)}to{transform:rotateX(-28deg) rotateY(405deg)}}
+@keyframes qc-twist{0%,20%{transform:rotateY(0)}70%,100%{transform:rotateY(90deg)}}
+@keyframes qc-twist2{0%,20%{transform:rotateY(0)}70%,100%{transform:rotateY(-90deg)}}
 @media(prefers-reduced-motion:reduce){
 @keyframes w-in{from{opacity:0}to{opacity:1}}
 @keyframes w-popin{from{opacity:0}to{opacity:1}}
@@ -519,7 +537,9 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 @keyframes w-lift{from{opacity:.6}to{opacity:1}}
 @keyframes w-bob{from{opacity:.6}to{opacity:1}}
 @keyframes w-tabin{from{opacity:.7}to{opacity:1}}
-.login .wrap>div:first-child:after,.card.loading{animation:none!important}
+.login .wrap>div:first-child:after{animation:none!important}
+.qcube .qc-s,.qcube .qc-l{animation:none!important}
+.qcube{animation:w-dot 1.4s ease-in-out infinite}
 .tk-ring .sg.me{animation:tkseg .6s var(--ease) both!important}
 *,*:before,*:after{transition-duration:.01ms!important}
 .okmark .r1,.okmark .r2,.rpl{display:none}
@@ -530,8 +550,8 @@ span.tile{min-height:0;box-shadow:none;border-radius:14px}
 </head>
 <body data-deep="" data-view="" data-line="" data-lt="" data-ls="" data-ln="" data-le="" data-tour="" data-lok="" data-st0="" data-auto="" data-web="">
 <script>window.onerror=function(m,u,l,c){var a=document.getElementById('app');if(a&&!window.__booted)a.innerHTML='<div class="loading">เปิดแอปไม่สำเร็จ กรุณาแจ้งผู้ดูแลระบบ<br><small>'+String(m).replace(/</g,'&lt;')+' ('+l+':'+c+')</small></div>'};setTimeout(function(){var a=document.getElementById('app');if(a&&!window.__booted)a.innerHTML='<div class="loading">ยังเปิดแอปไม่สำเร็จ กรุณาโหลดหน้านี้ใหม่ ถ้ายังไม่ได้ให้แจ้งผู้ดูแลระบบ</div>'},20000)</script>
-<div id="app"><div class="loading">กำลังโหลด…</div></div>
-<div id="modals"></div><div class="toasts" id="toasts"></div><div class="tip" id="tip"></div><div class="load" id="load" hidden></div>
+<div id="app"><div class="loading"><span class="qcube" aria-hidden="true"><span class="qc-s"><span class="qc-l qc-t"><i style="--x:-1;--y:-1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:-1;--y:-1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:-1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:-1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i></span><span class="qc-l qc-b"><i style="--x:-1;--y:1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:-1;--y:1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i></span></span></span>กำลังโหลด…</div></div>
+<div id="modals"></div><div class="toasts" id="toasts"></div><div class="tip" id="tip"></div><div class="load" id="load" hidden><span class="qcube" aria-hidden="true"><span class="qc-s"><span class="qc-l qc-t"><i style="--x:-1;--y:-1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:-1;--y:-1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:-1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:-1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i></span><span class="qc-l qc-b"><i style="--x:-1;--y:1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:-1;--y:1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i></span></span></span></div>
 <script>
 'use strict';
 const STORE='signq.token';
@@ -693,12 +713,13 @@ function shellIn(){const a=$('.app');if(!a)return;a.classList.remove('boot');voi
 document.addEventListener('touchstart',()=>{},{passive:true});
 const RPL='.ticket,.tile:not(span),.kindc,.q,.btn,.day,.time,.chip,.cmsg,.persona,.bottom a,.menubtn,.bell,.lang';
 document.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'||RM())return;const t=e.target.closest&&e.target.closest(RPL);if(!t||t.disabled)return;const r=t.getBoundingClientRect(),d=Math.max(r.width,r.height)*2.4,w=document.createElement('span'),i=document.createElement('i');w.className='rpl';w.setAttribute('aria-hidden','true');i.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;w.appendChild(i);t.appendChild(w);setTimeout(()=>w.remove(),700)},{passive:true});
+const QCUBE='<span class="qcube" aria-hidden="true"><span class="qc-s"><span class="qc-l qc-t"><i style="--x:-1;--y:-1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:-1;--y:-1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:-1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:-1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i></span><span class="qc-l qc-b"><i style="--x:-1;--y:1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:-1;--y:1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:1;--z:-1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i><i style="--x:1;--y:1;--z:1"><b class="fy"></b><b class="fx"></b><b class="fz"></b></i></span></span></span>';
 function fitNav(){const h=$('.hdr'),n=h&&h.querySelector('.nav');if(!n)return;h.classList.remove('c1','c2');if(!n.offsetParent)return;const over=()=>n.scrollWidth>n.clientWidth+1;if(over())h.classList.add('c1');if(over())h.classList.add('c2')}
 window.addEventListener('resize',()=>{clearTimeout(window.__fn);window.__fn=setTimeout(fitNav,120)});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fitNav());
 function pendingCard(){const l=S.as||!S.me.isAdmin?[]:(S.pendUsers||[]);return l.length?`<div class="card pad pend"><div class="row spread" style="flex-wrap:nowrap"><b>มีผู้ขอใช้งาน ${l.length} คน รออนุมัติ</b><button class="btn small" data-do="nav" data-view="admin">ดูทั้งหมด</button></div>${l.slice(0,5).map(x=>`<div class="prow"><span style="min-width:0"><b style="font-weight:600">${esc(x.name||'-')}</b><span class="hint" style="display:block;overflow-wrap:anywhere">${esc(x.department)} · ${esc(x.company)} · ${esc(whoOf(x))}</span>${hrTag(x)}</span><button class="btn small primary" data-do="apUser" data-e="${esc(x.email)}">อนุมัติ</button></div>`).join('')}</div>`:''}
 function setTop(title,sub,extra){return`<div class="top"><div><h1>${esc(title)}</h1>${sub?`<div class="sub">${sub}</div>`:''}</div>${extra?`<div class="row" style="flex-wrap:nowrap">${extra}</div>`:''}</div>`}
 const guard=(el,seq)=>{const rs=S.rseq;return new Proxy(el,{set(t,k,v){if(seq===S.seq)t[k]=v;return true},get(t,k){if(k==='__alive')return seq===S.seq&&rs===S.rseq;const v=t[k];return typeof v==='function'?v.bind(t):v}})};
-async function go(view,params){clearTimers();S.rseq=(S.rseq||0)+1;S.view=view;S.params=params||{};const seq=++S.seq;const bo=bIdx();$$('[data-view]').forEach(a=>a.classList.toggle('on',a.dataset.view===view));navInd(view);$$('.panel').forEach(p=>p.remove());const el=$('#main');const ck=view+'|'+(S.as||'')+'|'+JSON.stringify(S.params);const hit=CACHEV.includes(view)&&VC[ck];el.innerHTML=hit||setTop('กำลังโหลด…')+'<div class="card loading">กำลังโหลดข้อมูล…</div>';swipeIn(bo,bIdx());if(hit){paintCounts();motionIn()}window.scrollTo(0,0);let same=false;const g=guard(el,seq);try{await VIEWS[view](hit?new Proxy(g,{set(t,k,v){if(k==='innerHTML'){if(v===hit){same=true;return true}same=false}t[k]=v;return true}}):g,S.params);if(seq===S.seq){paintCounts();if(!same){if(CACHEV.includes(view))VC[ck]=el.innerHTML;motionIn()}}}catch(e){if(S.token&&seq===S.seq)el.innerHTML=setTop('เกิดข้อผิดพลาด')+`<div class="card empty">${esc(e.message)}<br><br><button class="btn" data-do="reload">ลองใหม่</button></div>`}}
+async function go(view,params){clearTimers();S.rseq=(S.rseq||0)+1;S.view=view;S.params=params||{};const seq=++S.seq;const bo=bIdx();$$('[data-view]').forEach(a=>a.classList.toggle('on',a.dataset.view===view));navInd(view);$$('.panel').forEach(p=>p.remove());const el=$('#main');const ck=view+'|'+(S.as||'')+'|'+JSON.stringify(S.params);const hit=CACHEV.includes(view)&&VC[ck];el.innerHTML=hit||setTop('กำลังโหลด…')+'<div class="card loading">'+QCUBE+'กำลังโหลดข้อมูล…</div>';swipeIn(bo,bIdx());if(hit){paintCounts();motionIn()}window.scrollTo(0,0);let same=false;const g=guard(el,seq);try{await VIEWS[view](hit?new Proxy(g,{set(t,k,v){if(k==='innerHTML'){if(v===hit){same=true;return true}same=false}t[k]=v;return true}}):g,S.params);if(seq===S.seq){paintCounts();if(!same){if(CACHEV.includes(view))VC[ck]=el.innerHTML;motionIn()}}}catch(e){if(S.token&&seq===S.seq)el.innerHTML=setTop('เกิดข้อผิดพลาด')+`<div class="card empty">${esc(e.message)}<br><br><button class="btn" data-do="reload">ลองใหม่</button></div>`}}
 function refresh(){if(!S.view||S.view==='book')return;clearTimers();S.rseq=(S.rseq||0)+1;VIEWS[S.view](guard($('#main'),S.seq),S.params).then(paintCounts).catch(()=>{})}
 function paintCounts(){$$('[data-cu]').forEach(e=>{e.textContent=S.cu||0;e.hidden=!S.cu});const pu=S.as?0:(S.pendUsers||[]).length;$$('[data-pusers]').forEach(e=>{e.textContent=pu;e.hidden=!pu});$$('[data-unread]').forEach(e=>{e.textContent=S.unread;e.hidden=!S.unread});$$('[data-pending]').forEach(e=>{e.textContent=S.pending;e.hidden=!S.pending})}
 function applyPoll(p,first){S.unread=p.unread;if(p.contactUnread!==undefined)S.cu=p.contactUnread;if(p.pending!==undefined)S.pending=p.pending;S.notifs=p.items;if(p.pendingUsers){const ch=(S.pendUsers||[]).length!==p.pendingUsers.length;S.pendUsers=p.pendingUsers;if(ch&&!first&&!S.as&&(S.view==='mine'||S.view==='home')&&!$('#modals .overlay'))refresh()}p.items.slice().reverse().forEach(n=>{if(!S.seen[n.id]){if(S.polled&&!first)popCard(n);S.seen[n.id]=1}});S.polled=true;paintCounts()}
