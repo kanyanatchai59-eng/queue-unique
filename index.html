@@ -240,7 +240,7 @@ select.cbx-src{position:absolute;left:0;top:0;width:1px;height:1px;min-height:0;
 #movebar{position:sticky;top:0;z-index:60;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 14px;background:#1f1f22;color:#fff;font-size:14px;text-align:center}
 #movebar a{color:#fff;font-weight:700;background:var(--red);border-radius:999px;padding:5px 14px;text-decoration:none}
 </style>
-<style id="v52">
+<style id="v53">
 @property --cv{syntax:'<integer>';inherits:false;initial-value:0}
 :root{--red:#95191F;--red2:#B0232A;--red-deep:#6E1016;--red-soft:#F6E7E7;--ink:#1E1C1A;--ink2:#4F4B46;--muted:#6B6762;--line:rgba(30,28,26,.09);--line2:rgba(30,28,26,.15);--bg:#EEECE8;--surface:#FAF8F5;--card2:#F3F1ED;--chip:#ECE9E4;--track:#D9D4CD;
 --good:#1F6B3F;--good-bg:#E2F1E7;--warn:#7A4B00;--warn-bg:#FBEFD5;--serious:#8E1B22;--serious-bg:#F8E4E4;--crit:#8E1B22;--crit-bg:#F8E4E4;--info:#1D4C86;--info-bg:#E4ECF7;--neutral:#4F4B46;--neutral-bg:#ECE9E4;
@@ -518,6 +518,13 @@ body:has(#main .card.loading) #load,body:has(#app>.loading) #load{display:none}
 @keyframes qc-spin{from{transform:rotateX(-28deg) rotateY(45deg)}to{transform:rotateX(-28deg) rotateY(405deg)}}
 @keyframes qc-twist{0%,20%{transform:rotateY(0)}70%,100%{transform:rotateY(90deg)}}
 @keyframes qc-twist2{0%,20%{transform:rotateY(0)}70%,100%{transform:rotateY(-90deg)}}
+.masc.mimg{position:relative;width:100%;height:auto;aspect-ratio:240/262}
+.masc.mimg .mb{position:absolute;inset:0;animation:mbob 2.6s ease-in-out infinite}
+.masc.mimg img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 6px 10px rgba(30,28,26,.18))}
+.masc.mimg img.in{animation:m-in .5s var(--spring) both}
+.masc.mimg.say .mb{animation:m-talk .3s ease-in-out infinite alternate}
+@keyframes m-in{from{opacity:0;transform:translateY(12px) scale(.88)}to{opacity:1;transform:none}}
+@keyframes m-talk{from{transform:none}to{transform:translateY(-3px) rotate(-1.2deg)}}
 @media(prefers-reduced-motion:reduce){
 @keyframes w-in{from{opacity:0}to{opacity:1}}
 @keyframes w-popin{from{opacity:0}to{opacity:1}}
@@ -1067,34 +1074,11 @@ async function preview(id,name){const o=openModal(`${head(name,'ตัวอย�
   const bin=atob(d.base64);const a=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);await renderPdf(box,a,o);if(d.converted&&o.isConnected)box.insertAdjacentHTML('afterbegin','<p class="hint" style="margin-bottom:8px">แปลงเป็น PDF เพื่อแสดงตัวอย่าง รูปแบบอาจต่างจากไฟล์จริงเล็กน้อย</p>')}
  catch(e){if(o.isConnected)box.innerHTML=`<div class="empty">${esc(e.message||'เปิดตัวอย่างไม่สำเร็จ')}<br>กรุณากดดาวน์โหลดแทน</div>`}}
  
-const MASCOT=`<svg class="masc" viewBox="0 0 240 262" aria-hidden="true"><defs>
-<radialGradient id="mg1" cx="42%" cy="34%" r="75%"><stop offset="0" stop-color="#FFEBDC"/><stop offset=".6" stop-color="#FBD3B8"/><stop offset="1" stop-color="#EDB391"/></radialGradient>
-<linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5A3B30"/><stop offset=".5" stop-color="#3C2620"/><stop offset="1" stop-color="#27171A"/></linearGradient>
-<linearGradient id="mg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E6EC"/></linearGradient>
-<linearGradient id="mg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3F48"/><stop offset="1" stop-color="#22262D"/></linearGradient>
-<linearGradient id="mg5" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FCDCC6"/><stop offset="1" stop-color="#EFB999"/></linearGradient></defs>
-<ellipse cx="120" cy="252" rx="56" ry="7" fill="#000" opacity=".16"/>
-<g class="m-body">
-<path d="M60 96C54 40 92 16 120 16s66 24 60 80c-2 24 4 44 12 58-16 6-30 3-38-6H86c-8 9-22 12-38 6 8-14 14-34 12-58z" fill="url(#mg2)"/>
-<path d="M101 232h15v14h-15zM124 232h15v14h-15z" fill="url(#mg5)"/>
-<path d="M96 244h24v4a6 6 0 0 1-6 6h-14a6 6 0 0 1-6-6c0-2 1-4 2-4zM120 244h24c1 0 2 2 2 4a6 6 0 0 1-6 6h-14a6 6 0 0 1-6-6z" fill="#2A1A1C"/>
-<path d="M76 204c14 5 29 7 44 7s30-2 44-7l7 28c-16 5-33 7-51 7s-35-2-51-7z" fill="url(#mg4)"/>
-<path d="M112 132h16v20h-16z" fill="#EDB391"/>
-<path d="M72 178c0-18 12-28 30-30l18 6 18-6c18 2 30 12 30 30v32c-14 5-32 7-48 7s-34-2-48-7z" fill="url(#mg3)"/>
-<path d="M102 148l18 20-11 9-15-21zM138 148l-18 20 11 9 15-21z" fill="#BD1F27"/>
-<path d="M119 168h2v44h-2z" fill="#D5D9E0"/>
-<text x="120" y="200" text-anchor="middle" font-family="'IBM Plex Sans Thai',Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="1.4" fill="#95191F">UNIQUE</text>
-<g class="m-arm m-arml"><path d="M62 163c-9 0-16 7-16 16v9h32v-9c0-9-7-16-16-16z" fill="url(#mg3)"/><path d="M46 186h32v3.5H46z" fill="#BD1F27"/><path d="M52 189h20v19a10 10 0 0 1-20 0z" fill="url(#mg5)"/><circle cx="62" cy="212" r="11" fill="url(#mg1)"/></g>
-<g class="m-arm m-armr"><path d="M178 163c9 0 16 7 16 16v9h-32v-9c0-9 7-16 16-16z" fill="url(#mg3)"/><path d="M162 186h32v3.5h-32z" fill="#BD1F27"/><path d="M168 189h20v19a10 10 0 0 1-20 0z" fill="url(#mg5)"/><circle cx="178" cy="212" r="11" fill="url(#mg1)"/></g>
-<g class="m-head"><circle cx="120" cy="86" r="54" fill="url(#mg1)"/>
-<ellipse cx="88" cy="108" rx="11" ry="6.5" fill="#FF9AA2" opacity=".6"/><ellipse cx="152" cy="108" rx="11" ry="6.5" fill="#FF9AA2" opacity=".6"/>
-<g class="m-eyes"><ellipse cx="99" cy="93" rx="8" ry="10.5" fill="#3A2420"/><ellipse cx="141" cy="93" rx="8" ry="10.5" fill="#3A2420"/><circle cx="102" cy="89" r="3.4" fill="#fff"/><circle cx="144" cy="89" r="3.4" fill="#fff"/><circle cx="96.5" cy="97" r="1.6" fill="#fff" opacity=".8"/><circle cx="138.5" cy="97" r="1.6" fill="#fff" opacity=".8"/><path d="M89 85q9-9 20-2M131 83q11-7 20 2" fill="none" stroke="#3A2420" stroke-width="2.6" stroke-linecap="round"/></g>
-<path d="M88 74q10-6 21-3M131 71q11-3 21 3" fill="none" stroke="#5A3B30" stroke-width="2.4" stroke-linecap="round"/>
-<path d="M118 104q2 2 4 0" fill="none" stroke="#D99A7C" stroke-width="2" stroke-linecap="round"/>
-<g class="m-mouth"><path d="M106 113q14 5 28 0q-3 13-14 13t-14-13z" fill="#B5383E"/><path d="M112 121q8-4 16 0q-3 5-8 5t-8-5z" fill="#FF8A93"/></g>
-<path d="M64 90C60 46 92 26 122 26c30 0 58 18 54 62-8-6-16-16-20-30-14 12-34 20-58 22-14 1-26 4-34 10z" fill="url(#mg2)"/>
-<path d="M84 44q22-14 50-8" fill="none" stroke="#7A5648" stroke-width="3" stroke-linecap="round" opacity=".55"/>
-<path d="M150 50l16 8-3 7-16-8z" fill="#BD1F27"/></g></g></svg>`;
+const MIMG=['https:','','kanyanatchai59-eng.github.io','queue-unique','m',''].join('/');
+const MPOSE={"สวัสดีค่ะ น้องยูนิคเองค่ะ":"wave","ปุ่ม \"จองคิวใหม่\"":"point","เลือกประเภทการจอง":"think","ขั้นที่ 1 เลือกวัน":"clasp","เวลาที่ใช้":"think","เลือกเวลา":"point","ปุ่ม \"ถัดไป\"":"walk","บัตรคิวของคุณ":"yay","เมนู \"ประวัติ\"":"clasp","กระดิ่งแจ้งเตือน":"sit","ปุ่ม \"เมนู\"":"point","พร้อมใช้งานแล้วค่ะ":"cheer","ปฏิทินนัดหมาย":"point","คิวของวันที่เลือก":"clasp","เมนู \"กล่องนัดหมาย\"":"walk","แถบตัวกรอง":"think","รายการคำขอ":"point","เมนู \"รอบเซ็น\"":"walk","ปุ่ม \"สร้างรอบ\"":"yay","รายการรอบ":"think","เมนู \"คิวสด\"":"walk","จอเรียกคิว":"point","ปุ่ม \"One-page Summary\"":"clasp","เมนู \"ตะกร้าฝาก\"":"walk","เมนู \"Dashboard\"":"think","ครบทุกปุ่มแล้วค่ะ":"cheer","ตารางนัดหมาย":"point","เมนู \"คำขอทั้งหมด\"":"walk","คิวของวันนี้":"clasp","เท่านี้ค่ะ":"heart","ผู้ขอใช้งานที่รออนุมัติ":"yay","หน้า \"ผู้ดูแล\"":"walk","รายชื่อผู้ใช้":"point","ปุ่ม \"ดูในมุมมองผู้อื่น\"":"think","แท็บ \"Workflow\"":"clasp","แท็บ \"การแจ้งเตือน\"":"sit","แท็บ \"ตั้งค่าระบบ\"":"think"};
+const MPRE=()=>['wave','yay','point','sit','cheer','clasp','think','walk','heart'].forEach(k=>{const i=new Image();i.decoding='async';i.src=MIMG+k+'.webp'});
+function mPose(m,k){if(!m||m.dataset.k===k)return;m.dataset.k=k;const im=m.querySelector('img');if(!im)return;im.classList.remove('in');im.src=MIMG+k+'.webp';void im.offsetWidth;im.classList.add('in')}
+const MASCOT='<div class="masc mimg" data-k="wave"><span class="mb"><img alt="" decoding="async" src="'+MIMG+'wave.webp"></span></div>';
 const navSel=v=>['.nav a[data-view="'+v+'"]','.bottom a[data-view="'+v+'"]'];
 const GUIDE={
  B:[
@@ -1170,7 +1154,7 @@ function tour(force){
  const home=S.view||defaultView();
  const root=document.createElement('div');root.className='coach';root.setAttribute('role','dialog');root.setAttribute('aria-label','สอนใช้งาน');
  root.innerHTML=`<div class="c-block"></div><div class="c-ring none"></div><div class="c-bub mid"><div class="c-m">${MASCOT}</div><div class="c-t"><div class="c-step"></div><h3></h3><p aria-hidden="true"></p><span class="sr" aria-live="polite"></span><div class="c-act"><button class="c-q" data-t="skip">ข้าม</button><button class="c-q" data-t="voice" hidden></button><span class="c-sp"></span><button class="c-b" data-t="back">ย้อนกลับ</button><button class="c-b c-go" data-t="next">ถัดไป</button></div></div><i class="c-tail"></i></div>`;
- document.body.appendChild(root);
+ document.body.appendChild(root);MPRE();
  const ring=$('.c-ring',root),bub=$('.c-bub',root),blk=$('.c-block',root),masc=$('.masc',root),cm=$('.c-m',root),pEl=$('p',bub),hEl=$('h3',bub),stepEl=$('.c-step',bub),nextB=$('[data-t=next]',bub),backB=$('[data-t=back]',bub),voiceB=$('[data-t=voice]',bub),tail=$('.c-tail',bub);
  let i=-1,target=null,typer=null,alive=true,moving=false,late=false,dir=1,voice=store.flag('tourvoice')==='1';
  const still=window.NO_TYPE||matchMedia('(prefers-reduced-motion: reduce)').matches;const L=s=>en()?(trOne(s)||s):s;
@@ -1190,7 +1174,7 @@ function tour(force){
    blk.style.clipPath=st.tap?`polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,${rl}px ${rt}px,${rl}px ${rb}px,${rr}px ${rb}px,${rr}px ${rt}px,${rl}px ${rt}px)`:''}
   else{ring.classList.add('none');blk.style.clipPath=''}
   bub.style.left=left+'px';bub.style.top=top+'px';tail.style.left=(tx-9)+'px';
-  const pose=on?'point':(st.pose||'rest');masc.classList.toggle('wave',pose==='wave'&&!moving);masc.classList.toggle('cheer',pose==='cheer'&&!moving);let al=8,ar=-8;
+  const pose=on?'point':(st.pose||'rest');masc.classList.toggle('wave',pose==='wave'&&!moving);masc.classList.toggle('cheer',pose==='cheer'&&!moving);mPose(masc,moving?'walk':(MPOSE[st.t]||(on?'point':'clasp')));let al=8,ar=-8;
   if(pose==='point'){const w=cm.offsetWidth,h=w*262/240,mx=left+cm.offsetLeft,my=top+cm.offsetTop;const right=cx>=mx+w/2;const sx=mx+w*(right?178:62)/240,sy=my+h*172/262;const a=Math.atan2(-(cx-sx),cy-sy)*180/Math.PI;if(right)ar=Math.max(-172,Math.min(-28,a>0?-172:a));else al=Math.min(172,Math.max(28,a<0?172:a))}
   masc.style.setProperty('--al',al+'deg');masc.style.setProperty('--ar',ar+'deg')};
  const loading=()=>!!$('#main>.card.loading');
